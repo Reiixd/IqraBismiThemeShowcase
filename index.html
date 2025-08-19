@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LMS Color Palettes – Toggle Demo</title>
+  <style>
+    :root {
+      --radius: 16px;
+      --shadow: 0 6px 16px rgba(0,0,0,.08);
+      --border: 1px solid rgba(0,0,0,.08);
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+
+    body {
+      margin: 0; 
+      font-family: var(--font);
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.4;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    h1 { font-size: 28px; margin: 16px 0 12px; }
+
+    .theme-switcher { display:flex; flex-wrap:wrap; gap: 10px; margin-bottom: 20px; }
+    .theme-switcher button {
+      padding: 8px 14px; border:0; border-radius:999px; cursor:pointer; font-weight:600;
+      box-shadow: var(--shadow);
+      background: #f0f0f0;
+      transition: background 0.3s, color 0.3s;
+    }
+    .theme-switcher button.active {
+      background: var(--primary);
+      color: var(--on-primary);
+    }
+
+    .navbar {
+      display:flex; justify-content:space-between; align-items:center;
+      background: var(--primary); color: var(--on-primary);
+      padding: 12px 16px; border-radius: var(--radius);
+    }
+    .navbar button { background: var(--accent); color: var(--on-accent); border:0; padding:8px 12px; border-radius:999px; font-weight:600; cursor:pointer; }
+
+    .layout { display:grid; grid-template-columns:220px 1fr; gap:16px; margin-top:20px; }
+    .sidebar { background: var(--secondary); color: var(--on-secondary); padding: 12px; border-radius: var(--radius); }
+    .sidebar h3 { margin-top:0; }
+
+    .content { display:grid; gap:16px; }
+    .card { background:#fff; border: var(--border); border-radius: var(--radius); padding:14px; box-shadow: var(--shadow); }
+    .card h4 { margin-top:0; }
+    .btn { border:0; border-radius:10px; padding:10px 14px; font-weight:600; cursor:pointer; box-shadow: var(--shadow); }
+    .btn-primary { background: var(--primary); color: var(--on-primary); }
+    .btn-accent { background: var(--accent); color: var(--on-accent); }
+
+    /* Themes */
+    .theme-1 { --primary:#003366; --on-primary:#ffffff; --secondary:#EED9B7; --on-secondary:#2b2b2b; --accent:#009975; --on-accent:#ffffff; --background:#FAF7F0; --text:#222; }
+    .theme-2 { --primary:#1E90A8; --on-primary:#ffffff; --secondary:#FFE1D6; --on-secondary:#2b2b2b; --accent:#FFD34D; --on-accent:#2b2b2b; --background:#FDFDFD; --text:#222; }
+    .theme-3 { --primary:#001F54; --on-primary:#ffffff; --secondary:#0E5E68; --on-secondary:#ffffff; --accent:#FF6600; --on-accent:#ffffff; --background:#F7F9FC; --text:#1f2937; }
+    .theme-4 { --primary:#4E7F5A; --on-primary:#ffffff; --secondary:#E9B3A2; --on-secondary:#2b2b2b; --accent:#5CA6E0; --on-accent:#0b2545; --background:#FFFBEA; --text:#2b2b2b; }
+    .theme-5 { --primary:#0A7E51; --on-primary:#ffffff; --secondary:#E4C972; --on-secondary:#2b2b2b; --accent:#4169E1; --on-accent:#ffffff; --background:#FFF8EF; --text:#222; }
+    .theme-6 { --primary:#8B0000; --on-primary:#ffffff; --secondary:#FFDAB9; --on-secondary:#2b2b2b; --accent:#FFA500; --on-accent:#2b2b2b; --background:#FFF5F5; --text:#2b2b2b; }
+    .theme-7 { --primary:#2C3E50; --on-primary:#ffffff; --secondary:#BDC3C7; --on-secondary:#2b2b2b; --accent:#E74C3C; --on-accent:#ffffff; --background:#ECF0F1; --text:#2b2b2b; }
+    .theme-8 { --primary:#006400; --on-primary:#ffffff; --secondary:#98FB98; --on-secondary:#2b2b2b; --accent:#FFD700; --on-accent:#2b2b2b; --background:#F0FFF0; --text:#2b2b2b; }
+    .theme-9 { --primary:#4B0082; --on-primary:#ffffff; --secondary:#D8BFD8; --on-secondary:#2b2b2b; --accent:#FF69B4; --on-accent:#ffffff; --background:#F8F0FF; --text:#2b2b2b; }
+    .theme-10 { --primary:#FF4500; --on-primary:#ffffff; --secondary:#FFDAB9; --on-secondary:#2b2b2b; --accent:#32CD32; --on-accent:#ffffff; --background:#FFF8F0; --text:#2b2b2b; }
+    .theme-11 { --primary:#4682B4; --on-primary:#ffffff; --secondary:#B0E0E6; --on-secondary:#2b2b2b; --accent:#FFD700; --on-accent:#2b2b2b; --background:#F0F8FF; --text:#2b2b2b; }
+    .theme-12 { --primary:#2F4F4F; --on-primary:#ffffff; --secondary:#8FBC8F; --on-secondary:#2b2b2b; --accent:#20B2AA; --on-accent:#ffffff; --background:#F5FFFA; --text:#2b2b2b; }
+  </style>
+</head>
+<body class="theme-1">
+  <div class="page">
+    <h1>LMS Color Palettes – Toggle Demo</h1>
+    <div class="theme-switcher">
+      <button onclick="setTheme('theme-1', this)" class="active">Warm + Neutral</button>
+      <button onclick="setTheme('theme-2', this)">Youthful & Energetic</button>
+      <button onclick="setTheme('theme-3', this)">Modern Tech</button>
+      <button onclick="setTheme('theme-4', this)">Nature Inspired</button>
+      <button onclick="setTheme('theme-5', this)">Cultural Subtlety</button>
+      <button onclick="setTheme('theme-6', this)">Heritage Red</button>
+      <button onclick="setTheme('theme-7', this)">Classic Contrast</button>
+      <button onclick="setTheme('theme-8', this)">Fresh Green</button>
+      <button onclick="setTheme('theme-9', this)">Royal Purple</button>
+      <button onclick="setTheme('theme-10', this)">Sunset Glow</button>
+      <button onclick="setTheme('theme-11', this)">Ocean Sky</button>
+      <button onclick="setTheme('theme-12', this)">Calm Teal</button>
+    </div>
+
+    <div class="navbar">
+      <div class="brand">Demo LMS</div>
+      <button>Start Quiz</button>
+    </div>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <h3>Courses</h3>
+        <ul>
+          <li>Mathematics</li>
+          <li>Science</li>
+          <li>Arabic</li>
+          <li>History</li>
+        </ul>
+      </aside>
+      <main class="content">
+        <article class="card">
+          <h4>Assignment</h4>
+          <p>Algebra Homework – Due in 2 days</p>
+          <button class="btn btn-accent">Submit</button>
+        </article>
+        <article class="card">
+          <h4>Quiz</h4>
+          <p>Science Chapter 4</p>
+          <button class="btn btn-primary">Review</button>
+        </article>
+        <article class="card">
+          <h4>Announcement</h4>
+          <p>Field trip on Thursday. Don’t forget your forms!</p>
+        </article>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    function setTheme(theme, btn) {
+      document.body.className = theme;
+      document.querySelectorAll('.theme-switcher button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+  </script>
+</body>
+</html>
